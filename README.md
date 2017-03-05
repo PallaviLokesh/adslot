@@ -1,57 +1,54 @@
-# 09-selenium
+# 07-validation
 
 ## Setup
 
-#### Assuming you have already installed [node](https://nodejs.org/), do in your terminal:
+Assuming you have already installed [node](https://nodejs.org/), do in your terminal:
 
 ```shell
 # Clone this repository
 $ git clone git@github.com:Adslot/node-puzzle.git
 # Go to current dir
-$ cd node_puzzle/09-selenium
+$ cd node_puzzle/07-validation
 # Install npm dependencies
 $ npm install
+# Test your solution
+$ npm test
 ```
 
+## Introduction
 
-#### Setup selenium server:
+In this puzzle you need to write a validation function in `lib/index.coffee`.
+The function will need validate input that looks like:
 
-(check for more info https://www.npmjs.com/package/selenium-standalone)
-
+```javascript
+{
+  id: 1,
+  name: "John",
+  email: "test@adslot.com",
+  taxRate: 0.1,
+  favouriteColour: "#323232",
+  interests: ["cycling", "programming"]
+}
 ```
-$ npm install selenium-standalone@latest -g
-$ selenium-standalone install
-$ selenium-standalone start
-```
 
+To be valid the input must satisfy:
 
-## Webdriver documentation
+- `id` required, integer, positive
+- `name` required, string, 63 character max length
+- `email` required, string, 255 character max length
+- `taxRate` required, float, minimum 0 and maximum 1
+- `favouriteColour` optional, string, colour hex
+- `interests` optional, array, all interests must be strings (31 char max length) and no more than 4 interests should be provided
 
- - General information about working with webdriver: https://code.google.com/p/selenium/wiki/WebDriverJs
- - Webdriver API docs: http://selenium.googlecode.com/git/docs/api/javascript/index.html
+**Note: there should be no other attributes in the input.**
 
+To make sure it works just do `npm test` from this directory.
 
 ## Tasks
 
-Extend `test.coffee` with your scenarios. You don't have to create/edit any other files.
+To complete this puzzle, you must:
 
-Run `npm test` to make sure your solution works as expected.
+- Fix the two broken tests. (Hint: Do not change the existing tests in `test/index.coffee`!)
+- Write more tests to demonstrate your skills finding edge cases and corner cases. Change validation function in `lib/index.coffee` so that it returns a proper result in your test.
 
-1. Contact us page
-
-  Add more checks for contact form (make sure all fields are on the page). Don't click submit button :)
-
-1. Google it
-
-  Try to search "Adslot" in Google, follow the first link and make sure that page title is from our website.
-
-1. Your own test
-
-   Think of your own scenario that tests something meaningful on our adslot.com website.
-
-
-#### Test your solution:
-
-```
-$ npm test
-```
+To test your validation functions run `npm test`.
